@@ -325,7 +325,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -334,32 +333,30 @@ class _HomePageState extends State<HomePage> {
         children: [
           // Barra de Pesquisa
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InkWell(
-              onTap: () {
-                 Navigator.pushNamed(context, '/search');
-              },
-            child: IgnorePointer(
-              child: TextField(
-              readOnly: true,
-              decoration: InputDecoration(
-                hintText: 'Search Flights',
-                prefixIcon: const Icon(Icons.search),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-              ),
-            ),
-            )
-            )
-          ),
+              padding: const EdgeInsets.all(16.0),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
+                  child: IgnorePointer(
+                    child: TextField(
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        hintText: 'Search Flights',
+                        prefixIcon: const Icon(Icons.search),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ))),
 
           // Categorias
           Padding(
@@ -367,7 +364,8 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildCategoryIcon(Icons.grid_view, 'All'), // adicionar ação aos botões
+                _buildCategoryIcon(
+                    Icons.grid_view, 'All'), // adicionar ação aos botões
                 _buildCategoryIcon(Icons.hotel, 'Hotel'),
                 _buildCategoryIcon(Icons.terrain, 'Hill'),
                 _buildCategoryIcon(Icons.beach_access, 'Beach'),
@@ -660,7 +658,7 @@ class SettingsPage extends StatelessWidget {
 class NotificationsPage extends StatelessWidget {
   NotificationsPage({Key? key}) : super(key: key);
 
-  // substituir as URL 
+  // substituir as URL
   final List<Map<String, String>> notifications = [
     {
       'image': 'https://via.placeholder.com/150',
@@ -787,34 +785,30 @@ class MyTravelsPage extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 150,
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: [
-                _buildTravelCard(
-                  'Ubud Bali, Indonesia',
-                  'Emirates',
-                  'assets/icons/indonesia.jpg',
-                ),
-                _buildTravelCard(
-                  'Raja Ampat, Indonesia',
-                  'Qatar Airways',
-                  'assets/icons/indonesia-2.jpg',
-                ),
-              ],
-            ),
+      body: Column(children: [
+        SizedBox(
+          height: 150,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: [
+              _buildTravelCard(
+                'Ubud Bali, Indonesia',
+                'Emirates',
+                'assets/icons/indonesia.jpg',
+              ),
+              _buildTravelCard(
+                'Raja Ampat, Indonesia',
+                'Qatar Airways',
+                'assets/icons/indonesia-2.jpg',
+              ),
+            ],
           ),
-        ]
-      ),
-
+        ),
+      ]),
     );
   }
 
-  Widget _buildTravelCard(
-      String title, String subtitle, String imagePath) {
+  Widget _buildTravelCard(String title, String subtitle, String imagePath) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SizedBox(
@@ -831,7 +825,8 @@ class MyTravelsPage extends StatelessWidget {
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
-                child: Image.asset( // trocar para Image.network e hospedar as imagens em algum lugar e passar o path delas aqui
+                child: Image.asset(
+                  // trocar para Image.network e hospedar as imagens em algum lugar e passar o path delas aqui
                   imagePath,
                   height: 80,
                   width: double.infinity,
@@ -877,7 +872,8 @@ class _SearchTravelsPageState extends State<SearchTravelsPage> {
   DateTime? multiCityDate2;
 
   // Função para abrir o calendário e selecionar a data
-  Future<void> _selectDate(BuildContext context, Function(DateTime) onDateSelected) async {
+  Future<void> _selectDate(
+      BuildContext context, Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -889,132 +885,133 @@ class _SearchTravelsPageState extends State<SearchTravelsPage> {
     }
   }
 
- @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text("Search Travels"),
-      backgroundColor: const Color(0xFF0CC0DF),
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(context);
-        },
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Search Travels"),
+        backgroundColor: const Color(0xFF0CC0DF),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-    ),
-    body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Trip type buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _tripTypeButton("Round Trip"),
-                _tripTypeButton("One Way"),
-                _tripTypeButton("Multi City"),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Fields based on trip type
-            if (tripType == "Round Trip" || tripType == "One Way")
-              Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Trip type buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _locationField("INDONESIA, HLP"),
-                  const SizedBox(height: 8),
-                  _locationField("THAILAND, BKK"),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: _dateField(
-                          label: "Departure",
-                          date: departureDate,
-                          onTap: () => _selectDate(context, (date) {
-                            setState(() {
-                              departureDate = date;
-                            });
-                          }),
-                        ),
-                      ),
-                      if (tripType == "Round Trip")
-                        const SizedBox(width: 16),
-                      if (tripType == "Round Trip")
+                  _tripTypeButton("Round Trip"),
+                  _tripTypeButton("One Way"),
+                  _tripTypeButton("Multi City"),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Fields based on trip type
+              if (tripType == "Round Trip" || tripType == "One Way")
+                Column(
+                  children: [
+                    _locationField("INDONESIA, HLP"),
+                    const SizedBox(height: 8),
+                    _locationField("THAILAND, BKK"),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
                         Flexible(
                           child: _dateField(
-                            label: "Return",
-                            date: returnDate,
+                            label: "Departure",
+                            date: departureDate,
                             onTap: () => _selectDate(context, (date) {
                               setState(() {
-                                returnDate = date;
+                                departureDate = date;
                               });
                             }),
                           ),
                         ),
-                    ],
-                  ),
-                ],
-              ),
-            if (tripType == "Multi City")
-              Column(
-                children: [
-                  _locationField("INDONESIA, HLP"),
-                  const SizedBox(height: 8),
-                  _locationField("THAILAND, BKK"),
-                  const SizedBox(height: 16),
-                  _dateField(
-                    label: "Departure",
-                    date: multiCityDate1,
-                    onTap: () => _selectDate(context, (date) {
-                      setState(() {
-                        multiCityDate1 = date;
-                      });
-                    }),
-                  ),
-                  const SizedBox(height: 16),
-                  _locationField("THAILAND, BKK"),
-                  const SizedBox(height: 8),
-                  _locationField("CHINA, PEK"),
-                  const SizedBox(height: 16),
-                  _dateField(
-                    label: "Departure",
-                    date: multiCityDate2,
-                    onTap: () => _selectDate(context, (date) {
-                      setState(() {
-                        multiCityDate2 = date;
-                      });
-                    }),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 24),
+                        if (tripType == "Round Trip") const SizedBox(width: 16),
+                        if (tripType == "Round Trip")
+                          Flexible(
+                            child: _dateField(
+                              label: "Return",
+                              date: returnDate,
+                              onTap: () => _selectDate(context, (date) {
+                                setState(() {
+                                  returnDate = date;
+                                });
+                              }),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              if (tripType == "Multi City")
+                Column(
+                  children: [
+                    _locationField("INDONESIA, HLP"),
+                    const SizedBox(height: 8),
+                    _locationField("THAILAND, BKK"),
+                    const SizedBox(height: 16),
+                    _dateField(
+                      label: "Departure",
+                      date: multiCityDate1,
+                      onTap: () => _selectDate(context, (date) {
+                        setState(() {
+                          multiCityDate1 = date;
+                        });
+                      }),
+                    ),
+                    const SizedBox(height: 16),
+                    _locationField("THAILAND, BKK"),
+                    const SizedBox(height: 8),
+                    _locationField("CHINA, PEK"),
+                    const SizedBox(height: 16),
+                    _dateField(
+                      label: "Departure",
+                      date: multiCityDate2,
+                      onTap: () => _selectDate(context, (date) {
+                        setState(() {
+                          multiCityDate2 = date;
+                        });
+                      }),
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 24),
 
-            // Search button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SearchResultsPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0CC0DF),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+              // Search button
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchResultsPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0CC0DF),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                ),
+                child: const Text(
+                  "Search",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
-              child: const Text(
-                "Search",
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   // Botão para selecionar o tipo de viagem
   Widget _tripTypeButton(String type) {
@@ -1025,7 +1022,8 @@ Widget build(BuildContext context) {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: tripType == type ? const Color(0xFF0CC0DF) : Colors.white,
+        backgroundColor:
+            tripType == type ? const Color(0xFF0CC0DF) : Colors.white,
         foregroundColor: tripType == type ? Colors.white : Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -1050,7 +1048,10 @@ Widget build(BuildContext context) {
   }
 
   // Campo para data
-  Widget _dateField({required String label, required DateTime? date, required VoidCallback onTap}) {
+  Widget _dateField(
+      {required String label,
+      required DateTime? date,
+      required VoidCallback onTap}) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -1064,7 +1065,9 @@ Widget build(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                date != null ? DateFormat('dd/MM/yyyy - EEEE').format(date) : label,
+                date != null
+                    ? DateFormat('dd/MM/yyyy - EEEE').format(date)
+                    : label,
                 style: const TextStyle(fontSize: 14, color: Colors.black),
               ),
               const Icon(Icons.calendar_today, color: Color(0xFF0CC0DF)),
@@ -1271,7 +1274,9 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                             // Ícone de favorito
                             IconButton(
                               icon: Icon(
-                                isLiked ? Icons.favorite : Icons.favorite_border,
+                                isLiked
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
                                 color: isLiked ? Colors.red : Colors.grey,
                               ),
                               onPressed: () {
@@ -1299,7 +1304,8 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
   }
 
   // Botão de filtro
-  Widget _filterButton(BuildContext context, String label, {bool isSelected = false}) {
+  Widget _filterButton(BuildContext context, String label,
+      {bool isSelected = false}) {
     return ElevatedButton(
       onPressed: () {
         // Ação do botão de filtro
@@ -1389,7 +1395,8 @@ class PriceMonitoringPage extends StatelessWidget {
                     // Ícone de gráfico e botão de detalhes
                     Column(
                       children: [
-                        const Icon(Icons.show_chart, size: 30, color: Colors.black),
+                        const Icon(Icons.show_chart,
+                            size: 30, color: Colors.black),
                         const SizedBox(height: 8),
                         ElevatedButton(
                           onPressed: () {
