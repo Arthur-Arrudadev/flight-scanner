@@ -1,3 +1,4 @@
+import 'package:flight_scanner/main.dart';
 import 'package:flutter/material.dart';
 
 class BasePage extends StatefulWidget {
@@ -84,4 +85,60 @@ class _BasePageState extends State<BasePage> {
       ),
     );
   }
+}
+
+import 'package:flutter/material.dart';
+import 'hotel_search_page.dart'; // Certifique-se de importar a página HotelSearchPage
+
+class HomePages extends StatefulWidget {
+  @override
+  State<HomePages> createState() => _HomePagesState();
+}
+
+class _HomePagesState extends State<HomePages> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  static List<Widget> _widgetOptions = <Widget>[
+    // Substitua esses widgets pelos seus widgets reais
+    Center(child: Text('Home Page')),
+    HotelSearchPage(),
+    Center(child: Text('Profile Page')),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Page'),
+        backgroundColor: Colors.cyan,
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.hotel),
+            label: 'Hotel',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.cyan,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+
 }

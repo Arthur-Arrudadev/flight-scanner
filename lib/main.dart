@@ -1421,3 +1421,10 @@ class PriceMonitoringPage extends StatelessWidget {
     );
   }
 }
+
+class CustomToolbar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
