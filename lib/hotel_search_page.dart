@@ -1,10 +1,11 @@
-// Importações devem aparecer no início do arquivo
+// ignore: unused_import
 import 'package:flight_scanner/main.dart';
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'hotel_search_page.dart'; // Certifique-se de importar a página HotelSearchPage
+//  importar a página HotelSearchPage
+import 'hotel_search_page.dart'; 
 
-import 'package:flutter/material.dart';
+
+
 
 class HotelSearchPage extends StatelessWidget {
   final List<Map<String, String>> hotels = [
